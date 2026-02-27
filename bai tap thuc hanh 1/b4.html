@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Form</title>
+</head>
+
+<body>
+
+<center>
+<table border="1" width="700" cellpadding="5" cellspacing="0">
+
+<tr>
+<td>
+
+<!-- BASIC INFO -->
+<b>Basic Info</b>
+<hr>
+
+<table width="100%" cellpadding="5">
+
+<tr>
+<td width="30%">Employee ID</td>
+<td><input type="text" value="9" size="10"></td>
+</tr>
+
+<tr>
+<td>Last Name</td>
+<td><input type="text" value="Dodsworth" size="40"></td>
+</tr>
+
+<tr>
+<td>First Name</td>
+<td><input type="text" value="Anne" size="40"></td>
+</tr>
+
+<tr>
+<td>Gender</td>
+<td>
+<input type="radio" name="gender"> Male<br>
+<input type="radio" name="gender"> Female<br>
+<input type="radio" name="gender"> XXX<br>
+<input type="radio" name="gender"> ZZZ
+</td>
+</tr>
+
+<tr>
+<td>Title</td>
+<td><input type="text" value="Sales Representative" size="40"></td>
+</tr>
+
+<tr>
+<td>Suffix</td>
+<td><input type="text" value="Ms." size="10"></td>
+</tr>
+
+<tr>
+<td>BirthDate</td>
+<td><input type="datetime-local"></td>
+</tr>
+
+<tr>
+<td>HireDate</td>
+<td><input type="datetime-local"></td>
+</tr>
+
+<tr>
+<td>SSN (# if applicable)</td>
+<td><input type="text" size="30"></td>
+</tr>
+
+<tr>
+<td>Reports To</td>
+<td>
+<select>
+<option>Buchanan</option>
+<option>Davolio</option>
+</select>
+</td>
+</tr>
+
+</table>
+
+<br>
+
+<!-- CONTACT INFO -->
+<b>Contact Info</b>
+<hr>
+
+<table width="100%" cellpadding="5">
+
+<tr>
+<td width="30%">Email</td>
+<td><input type="email" size="40"></td>
+</tr>
+
+<tr>
+<td>Address</td>
+<td><input type="text" value="7 Houndstooth Rd." size="40"></td>
+</tr>
+
+<tr>
+<td>City</td>
+<td><input type="text" value="London"></td>
+</tr>
+
+<tr>
+<td>Region</td>
+<td><input type="text"></td>
+</tr>
+
+<tr>
+<td>Postal Code</td>
+<td><input type="text" value="WG2 7LT"></td>
+</tr>
+
+<tr>
+<td>Country</td>
+<td>
+<select>
+<option>Russian Federation</option>
+<option>USA</option>
+<option>UK</option>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>US Home Phone</td>
+<td><input type="text" value="(234)234-2342"></td>
+</tr>
+
+<tr>
+<td>Photo</td>
+<td><input type="file"></td>
+</tr>
+
+</table>
+
+<br>
+
+<!-- OPTIONAL INFO -->
+<b>Optional Info</b>
+<hr>
+
+<table width="100%" cellpadding="5">
+
+<tr>
+<td width="30%">Notes</td>
+<td>
+<textarea rows="6" cols="50">
+Anne has a BA degree in English from St. Lawrence College.
+She is fluent in French and German.
+</textarea>
+</td>
+</tr>
+
+<tr>
+<td>Preferred Shift</td>
+<td>
+<input type="checkbox"> Regular<br>
+<input type="checkbox"> Gravy Yard
+</td>
+</tr>
+
+<tr>
+<td>Active?</td>
+<td><input type="checkbox" checked></td>
+</tr>
+
+<tr>
+<td colspan="2" align="right">
+<input type="submit" value="Submit">
+<input type="reset" value="Cancel">
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+</center>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HR Management</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f2f2f2;
+}
+
+/* NAVBAR */
+.navbar{
+    width:950px;
+    margin:20px auto 0;
+    background:#222;
+    color:white;
+    padding:10px 15px;
+}
+
+.navbar a{
+    color:#ccc;
+    text-decoration:none;
+    margin-left:15px;
+    font-size:14px;
+}
+
+.navbar input{
+    padding:5px;
+    width:180px;
+}
+
+.navbar button{
+    padding:5px 10px;
+}
+
+/* MAIN CONTAINER */
+.container{
+    width:950px;
+    margin:0 auto;
+    background:white;
+    border:2px solid #5dade2;
+    padding:20px;
+}
+
+/* HEADER */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.add-btn{
+    background:#2e86de;
+    color:white;
+    border:none;
+    padding:6px 12px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th, td{
+    border:1px solid #ddd;
+    padding:10px;
+    font-size:14px;
+}
+
+th{
+    background:#f4f6f6;
+    text-align:left;
+}
+
+.edit{
+    background:#f4c542;
+    border:none;
+    padding:4px 8px;
+    cursor:pointer;
+}
+
+.delete{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:4px 8px;
+    cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+    width:500px;
+    margin:40px auto;
+    border:2px solid #2e86de;
+    background:white;
+}
+
+.modal-header{
+    background:#2e86de;
+    color:white;
+    padding:10px;
+    font-weight:bold;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.row{
+    display:flex;
+    gap:20px;
+}
+
+.col{
+    flex:1;
+}
+
+.modal label{
+    display:block;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.modal input, .modal select{
+    width:100%;
+    padding:6px;
+    margin-top:5px;
+}
+
+.modal-footer{
+    text-align:right;
+    margin-top:15px;
+}
+
+.save{
+    background:#27ae60;
+    color:white;
+    border:none;
+    padding:6px 12px;
+}
+
+.cancel{
+    background:#95a5a6;
+    color:white;
+    border:none;
+    padding:6px 12px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <b>HR Management</b>
+    <a href="#">Home</a>
+    <a href="#">Contact</a>
+
+    <span style="float:right;">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </span>
+</div>
+
+<!-- TABLE SECTION -->
+<div class="container">
+
+<div class="header">
+    <h3>Employee</h3>
+    <button class="add-btn">+ Add</button>
+</div>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Position</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>Fatima Beatriz</td>
+<td>Fatima Beatriz@gmail.com</td>
+<td>0985674321</td>
+<td>Staff</td>
+<td>
+<button class="edit">Edit</button>
+<button class="delete">Delete</button>
+</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>Gabriel Hanna</td>
+<td>Gabriel Hanna@gmail.com</td>
+<td>035674321</td>
+<td>Staff</td>
+<td>
+<button class="edit">Edit</button>
+<button class="delete">Delete</button>
+</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>Charles Diya</td>
+<td>Charles Diya@gmail.com</td>
+<td>0347658833</td>
+<td>Staff</td>
+<td>
+<button class="edit">Edit</button>
+<button class="delete">Delete</button>
+</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>Frank Lamdo</td>
+<td>Frank Lamdo@gmail.com</td>
+<td>0975444768</td>
+<td>Manager</td>
+<td>
+<button class="edit">Edit</button>
+<button class="delete">Delete</button>
+</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>Louis Tom</td>
+<td>Louis Tom@gmail.com</td>
+<td>0789568223</td>
+<td>Staff</td>
+<td>
+<button class="edit">Edit</button>
+<button class="delete">Delete</button>
+</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- NEW EMPLOYEE FORM -->
+<div class="modal">
+
+<div class="modal-header">
+New Employee
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+<div class="col">
+<label>Name</label>
+<input type="text">
+</div>
+
+<div class="col">
+<label>Email</label>
+<input type="email">
+</div>
+</div>
+
+<div class="row">
+<div class="col">
+<label>Phone</label>
+<input type="text">
+</div>
+
+<div class="col">
+<label>Position</label>
+<select>
+<option>-- Select Position --</option>
+<option>Staff</option>
+<option>Manager</option>
+<option>CEO</option>
+</select>
+</div>
+</div>
+
+<label>Sex</label>
+<input type="radio" name="sex"> Male
+<input type="radio" name="sex"> Female
+
+<div class="modal-footer">
+<button class="save">Save</button>
+<button class="cancel">Cancel</button>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

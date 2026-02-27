@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khóa học sắp khai giảng</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+
+    body { background: #f5f5f5; }
+
+    .container {
+      width: 1200px;
+      margin: 30px auto;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d32f2f;
+      margin-bottom: 20px;
+      border-left: 6px solid #d32f2f;
+      padding-left: 10px;
+    }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .course {
+      border: 1px solid #ddd;
+      padding: 15px;
+      background: #fff;
+      transition: 0.2s;
+    }
+
+    .course:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+    }
+
+    .course img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .course h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .course p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .info {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .info div {
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 1024px) {
+      .container { width: 95%; }
+      .courses { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .courses { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="title">KHÓA HỌC SẮP KHAI GIẢNG</div>
+
+    <div class="courses">
+
+      <div class="course">
+        <img src="tải xuống.png" alt="">
+        <h3>LẬP TRÌNH VIÊN QUỐC TẾ</h3>
+        <p>Chương trình đào tạo chuẩn quốc tế và toàn diện. Phù hợp với học sinh tốt nghiệp THPT.</p>
+        <div class="info">
+          <div>💰 Học bổng: 15.000.000 VND</div>
+          <div>📅 Khai giảng: 2/2024</div>
+          <div>⏱ Thời lượng: 2 - 2.5 năm</div>
+        </div>
+      </div>
+
+      <div class="course">
+        <img src="tải xuống2.jpg" alt="">
+        <h3>LẬP TRÌNH WEB FULLSTACK</h3>
+        <p>Khóa học phù hợp với người bắt đầu lập trình hoặc muốn chuyển nghề.</p>
+        <div class="info">
+          <div>🎁 Ưu đãi giảm 15% học phí</div>
+          <div>📅 Khai giảng: 2/2024</div>
+          <div>⏱ Thời lượng: 6 tháng</div>
+        </div>
+      </div>
+
+      <div class="course">
+        <img src="tải xuống3.jpg" alt="">
+        <h3>LẬP TRÌNH JAVA FULLSTACK</h3>
+        <p>Phát triển ứng dụng web từ cơ bản đến nâng cao bằng Java.</p>
+        <div class="info">
+          <div>🎁 Ưu đãi giảm 15% học phí</div>
+          <div>📅 Khai giảng: 2/2024</div>
+          <div>⏱ Thời lượng: 236 giờ</div>
+        </div>
+      </div>
+
+      <div class="course">
+        <img src="tải xuống4.jpg" alt="">
+        <h3>LẬP TRÌNH PHP & LARAVEL</h3>
+        <p>Khóa học trang bị kỹ năng xây dựng web hoàn chỉnh sử dụng PHP.</p>
+        <div class="info">
+          <div>📅 Khai giảng: 5/2024</div>
+          <div>💰 Học phí: 6.000.000 VND</div>
+          <div>⏱ Thời lượng: 36 giờ</div>
+        </div>
+      </div>
+
+      <div class="course">
+        <img src="tải xuống5.jpg" alt="">
+        <h3>KHÓA HỌC LẬP TRÌNH .NET</h3>
+        <p>Phát triển ứng dụng web sử dụng nền tảng ASP.NET Core MVC.</p>
+        <div class="info">
+          <div>📅 Khai giảng: 2/2024</div>
+          <div>💰 Học phí: 6.000.000 VND</div>
+          <div>⏱ Thời lượng: 40 giờ</div>
+        </div>
+      </div>
+
+      <div class="course">
+        <img src="tải xuống6.jpg" alt="">
+        <h3>LẬP TRÌNH SQL SERVER</h3>
+        <p>Trang bị kiến thức nền tảng về SQL Server và quản trị cơ sở dữ liệu.</p>
+        <div class="info">
+          <div>📅 Khai giảng: 2/2024</div>
+          <div>💰 Học phí: 4.500.000 VND</div>
+          <div>⏱ Thời lượng: 30 giờ</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
