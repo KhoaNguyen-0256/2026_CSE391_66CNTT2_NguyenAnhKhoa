@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Quản lý điểm sinh viên</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    padding:20px;
+}
+
+input,select,button{
+    padding:6px;
+    margin-right:10px;
+}
+
+table{
+    border-collapse: collapse;
+    margin-top:15px;
+    width:600px;
+}
+
+th,td{
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#f2f2f2;
+}
+
+.lowScore{
+    background:yellow;
+}
+
+#scoreHeader{
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Quản lý điểm sinh viên</h2>
+
+<!-- thêm sinh viên -->
+<input id="nameInput" placeholder="Họ tên">
+<input id="scoreInput" placeholder="Điểm (0-10)">
+<button id="addBtn">Thêm</button>
+
+<br><br>
+
+<!-- tìm kiếm + lọc -->
+<input id="searchInput" placeholder="Tìm theo tên...">
+
+<select id="filterRank">
+<option value="all">Tất cả</option>
+<option value="Giỏi">Giỏi</option>
+<option value="Khá">Khá</option>
+<option value="Trung bình">Trung bình</option>
+<option value="Yếu">Yếu</option>
+</select>
+
+<table>
+
+<thead>
+<tr>
+<th>STT</th>
+<th>Họ tên</th>
+<th id="scoreHeader">Điểm <span id="arrow"></span></th>
+<th>Xếp loại</th>
+<th>Thao tác</th>
+</tr>
+</thead>
+
+<tbody id="tableBody">
+</tbody>
+
+</table>
+
+<p id="stats">Tổng SV: 0 | Điểm TB: 0</p>
+
+
+<script>
+
+let students = [];
+
+let searchText = "";
+let filterRank = "all";
+let sortAsc = true;
+
+
+const nameInput = document.getElementById("nameInput");
+const scoreInput = document.getElementById("scoreInput");
+const addBtn = document.getElementById("addBtn");
+
+const searchInput = document.getElementById("searchInput");
+const filterSelect = document.getElementById("filterRank");
+
+const tableBody = document.getElementById("tableBody");
+
+const scoreHeader = document.getElementById("scoreHeader");
+const arrow = document.getElementById("arrow");
+
+const stats = document.getElementById("stats");
+
+
+function getRank(score){
+
+    if(score >= 8.5) return "Giỏi";
+    if(score >= 7) return "Khá";
+    if(score >= 5) return "Trung bình";
+
+    return "Yếu";
+
+}
+
+
+function getProcessedList(){
+
+    let result = [...students];
+
+    if(searchText !== ""){
+        result = result.filter(sv =>
+            sv.name.toLowerCase().includes(searchText.toLowerCase())
+        );
+    }
+
+    if(filterRank !== "all"){
+        result = result.filter(sv =>
+            getRank(sv.score) === filterRank
+        );
+    }
+
+    result.sort((a,b)=>{
+        return sortAsc ? a.score - b.score : b.score - a.score;
+    });
+
+    return result;
+
+}
+
+
+function renderTable(){
+
+    let list = getProcessedList();
+
+    tableBody.innerHTML = "";
+
+    if(list.length === 0){
+
+        tableBody.innerHTML = `
+        <tr>
+        <td colspan="5">Không có kết quả</td>
+        </tr>
+        `;
+
+        updateStats();
+        return;
+    }
+
+    list.forEach((sv,index)=>{
+
+        let tr = document.createElement("tr");
+
+        if(sv.score < 5){
+            tr.classList.add("lowScore");
+        }
+
+        tr.innerHTML = `
+        <td>${index+1}</td>
+        <td>${sv.name}</td>
+        <td>${sv.score}</td>
+        <td>${getRank(sv.score)}</td>
+        <td><button class="deleteBtn" data-name="${sv.name}">Xóa</button></td>
+        `;
+
+        tableBody.appendChild(tr);
+
+    });
+
+    updateStats();
+
+}
+
+
+function updateStats(){
+
+    let total = students.length;
+
+    let sum = 0;
+
+    students.forEach(sv=>{
+        sum += sv.score;
+    });
+
+    let avg = total ? (sum/total).toFixed(2) : 0;
+
+    stats.innerText = `Tổng SV: ${total} | Điểm TB: ${avg}`;
+
+}
+
+
+addBtn.addEventListener("click",function(){
+
+    let name = nameInput.value.trim();
+    let score = parseFloat(scoreInput.value);
+
+    if(name === ""){
+        alert("Họ tên không được trống");
+        return;
+    }
+
+    if(isNaN(score) || score < 0 || score > 10){
+        alert("Điểm phải từ 0 đến 10");
+        return;
+    }
+
+    students.push({
+        name:name,
+        score:score
+    });
+
+    renderTable();
+
+    nameInput.value="";
+    scoreInput.value="";
+
+    nameInput.focus();
+
+});
+
+
+tableBody.addEventListener("click",function(e){
+
+    if(e.target.classList.contains("deleteBtn")){
+
+        let name = e.target.dataset.name;
+
+        students = students.filter(sv => sv.name !== name);
+
+        renderTable();
+
+    }
+
+});
+
+
+searchInput.addEventListener("input",function(){
+
+    searchText = this.value;
+
+    renderTable();
+
+});
+
+
+filterSelect.addEventListener("change",function(){
+
+    filterRank = this.value;
+
+    renderTable();
+
+});
+
+
+scoreHeader.addEventListener("click",function(){
+
+    sortAsc = !sortAsc;
+
+    arrow.textContent = sortAsc ? "▲" : "▼";
+
+    renderTable();
+
+});
+
+
+scoreInput.addEventListener("keypress",function(e){
+
+    if(e.key === "Enter"){
+        addBtn.click();
+    }
+
+});
+
+</script>
+
+</body>
+</html>

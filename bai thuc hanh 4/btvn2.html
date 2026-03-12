@@ -1,0 +1,277 @@
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Form Đăng ký nhiều bước</title>
+
+<style>
+
+body{
+font-family:Arial;
+padding:30px;
+}
+
+.step{
+display:none;
+}
+
+.step.active{
+display:block;
+}
+
+button{
+margin-top:15px;
+padding:6px 12px;
+}
+
+.error{
+color:red;
+font-size:14px;
+}
+
+.progress{
+width:300px;
+height:10px;
+background:#ddd;
+margin-bottom:20px;
+}
+
+.progress-bar{
+height:100%;
+width:33%;
+background:green;
+}
+
+</style>
+
+</head>
+<body>
+
+<h2>Đăng ký tài khoản</h2>
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<form id="multiForm">
+
+<!-- STEP 1 -->
+
+<div class="step active" id="step1">
+
+<h3>Bước 1: Thông tin cá nhân</h3>
+
+<label>Họ tên</label><br>
+<input type="text" id="fullname">
+<div class="error" id="fullnameError"></div>
+
+<br><br>
+
+<label>Ngày sinh</label><br>
+<input type="date" id="birth">
+<div class="error" id="birthError"></div>
+
+<br><br>
+
+<label>Giới tính</label><br>
+<input type="radio" name="gender" value="Nam"> Nam
+<input type="radio" name="gender" value="Nữ"> Nữ
+<div class="error" id="genderError"></div>
+
+<br>
+
+<button type="button" onclick="nextStep()">Tiếp theo</button>
+
+</div>
+
+
+<!-- STEP 2 -->
+
+<div class="step" id="step2">
+
+<h3>Bước 2: Thông tin tài khoản</h3>
+
+<label>Email</label><br>
+<input type="text" id="email">
+<div class="error" id="emailError"></div>
+
+<br><br>
+
+<label>Mật khẩu</label><br>
+<input type="password" id="password">
+<div class="error" id="passwordError"></div>
+
+<br><br>
+
+<label>Xác nhận mật khẩu</label><br>
+<input type="password" id="confirmPassword">
+<div class="error" id="confirmPasswordError"></div>
+
+<br>
+
+<button type="button" onclick="prevStep()">Quay lại</button>
+<button type="button" onclick="nextStep()">Tiếp theo</button>
+
+</div>
+
+
+<!-- STEP 3 -->
+
+<div class="step" id="step3">
+
+<h3>Bước 3: Xác nhận thông tin</h3>
+
+<div id="summary"></div>
+
+<br>
+
+<button type="button" onclick="prevStep()">Quay lại</button>
+<button type="submit">Đăng ký</button>
+
+</div>
+
+</form>
+
+<script>
+
+let currentStep = 1;
+
+const progressBar = document.getElementById("progressBar");
+
+function showStep(step){
+
+document.querySelectorAll(".step").forEach(s=>{
+s.classList.remove("active");
+});
+
+document.getElementById("step"+step).classList.add("active");
+
+progressBar.style.width = (step*33)+"%";
+
+}
+
+function nextStep(){
+
+if(currentStep===1 && !validateStep1()) return;
+if(currentStep===2 && !validateStep2()) return;
+
+currentStep++;
+
+if(currentStep===3){
+showSummary();
+}
+
+showStep(currentStep);
+
+}
+
+function prevStep(){
+
+currentStep--;
+showStep(currentStep);
+
+}
+
+function validateStep1(){
+
+let valid=true;
+
+let fullname=document.getElementById("fullname").value.trim();
+let birth=document.getElementById("birth").value;
+let genders=document.getElementsByName("gender");
+
+document.getElementById("fullnameError").innerText="";
+document.getElementById("birthError").innerText="";
+document.getElementById("genderError").innerText="";
+
+if(fullname===""){
+document.getElementById("fullnameError").innerText="Không được để trống";
+valid=false;
+}
+
+if(birth===""){
+document.getElementById("birthError").innerText="Chọn ngày sinh";
+valid=false;
+}
+
+let genderSelected=false;
+
+for(let g of genders){
+if(g.checked) genderSelected=true;
+}
+
+if(!genderSelected){
+document.getElementById("genderError").innerText="Chọn giới tính";
+valid=false;
+}
+
+return valid;
+
+}
+
+function validateStep2(){
+
+let valid=true;
+
+let email=document.getElementById("email").value.trim();
+let password=document.getElementById("password").value;
+let confirm=document.getElementById("confirmPassword").value;
+
+let regex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+document.getElementById("emailError").innerText="";
+document.getElementById("passwordError").innerText="";
+document.getElementById("confirmPasswordError").innerText="";
+
+if(!regex.test(email)){
+document.getElementById("emailError").innerText="Email không hợp lệ";
+valid=false;
+}
+
+if(password.length<6){
+document.getElementById("passwordError").innerText="Mật khẩu tối thiểu 6 ký tự";
+valid=false;
+}
+
+if(confirm!==password){
+document.getElementById("confirmPasswordError").innerText="Mật khẩu không khớp";
+valid=false;
+}
+
+return valid;
+
+}
+
+function showSummary(){
+
+let fullname=document.getElementById("fullname").value;
+let birth=document.getElementById("birth").value;
+
+let gender=document.querySelector("input[name='gender']:checked")?.value;
+
+let email=document.getElementById("email").value;
+
+document.getElementById("summary").innerHTML=
+`
+<p><b>Họ tên:</b> ${fullname}</p>
+<p><b>Ngày sinh:</b> ${birth}</p>
+<p><b>Giới tính:</b> ${gender}</p>
+<p><b>Email:</b> ${email}</p>
+`;
+
+}
+
+document.getElementById("multiForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+alert("Đăng ký thành công!");
+
+});
+
+</script>
+
+</body>
+</html>
+```
